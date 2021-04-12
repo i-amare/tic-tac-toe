@@ -1,0 +1,28 @@
+:root {
+	--grid-size: 400px;
+	--character-size: 90px;
+	--o-colour: #69d2e7;
+	--x-colour: #f38680;
+	--border-colour: lightsteelblue;
+	--background-colour: #f5f7ee;
+}
+
+* {
+	background-color: var(--background-colour);
+}
+
+/* Creates the game grid */
+#r0c0,
+#r0c1,
+#r0c2,
+#r1c0,
+#r1c1,
+#r1c2 {
+	border-bottom: 2px solid var(--border-colour);
+}
+#r0c1,
+#r1c1,
+#r2c1 {
+	border-right: 2px solid var(--border-colour);
+	border-left: 2px solid var(--border-colour);
+}
