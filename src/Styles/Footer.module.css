@@ -1,0 +1,9 @@
+.container {
+	display: grid;
+	align-items: center;
+	justify-content: center;
+}
+
+.btn {
+	width: var(--font-size);
+}

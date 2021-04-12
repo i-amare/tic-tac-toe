@@ -1,5 +1,6 @@
 import Grid from './Components/Grid';
 import ScoreBoard from './Components/Scoreboard';
+import Footer from './Components/Footer';
 import './Styles/App.css';
 import { useState } from 'react';
 import Vendor from './Scripts/vendor';
@@ -25,8 +26,10 @@ function App() {
 
 	const [currentPlayer, setCurrentPlayer] = useState('x');
 
+	const [gameState, setGameState] = useState(true);
+
 	const onTileClick = (rowIdx: number, colIdx: number) => {
-		if (!gridState[rowIdx][colIdx]) {
+		if (!gridState[rowIdx][colIdx] && gameState) {
 			updateGridState(rowIdx, colIdx);
 			switchCurrentPlayer();
 			if (Vendor.checkWin(gridState)) {
@@ -43,20 +46,32 @@ function App() {
 		setGridState(updatedGridState);
 	};
 
-	const switchCurrentPlayer = () => {
-		currentPlayer === 'x' ? setCurrentPlayer('o') : setCurrentPlayer('x');
-	};
-
 	const updateScore = (score: String) => {
 		let newScore = scoreState;
 		newScore[score as keyof scoreBoard] += 1;
 		setScoreState(newScore);
+		setGameState(false)
+	};
+
+	const resetGame = () => {
+		setGridState([
+			['', '', ''],
+			['', '', ''],
+			['', '', ''],
+		]);
+		setCurrentPlayer('x');
+		setGameState(true);
+	};
+
+	const switchCurrentPlayer = () => {
+		currentPlayer === 'x' ? setCurrentPlayer('o') : setCurrentPlayer('x');
 	};
 
 	return (
 		<div className='App'>
 			<ScoreBoard score={scoreState} />
 			<Grid gridState={gridState} onTileClick={onTileClick} />
+			<Footer resetGame={resetGame} />
 		</div>
 	);
 }

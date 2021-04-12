@@ -21,7 +21,9 @@ const Scoreboard = (props: scoreBoardProps) => {
 					key={nameIdx}
 				>
 					<h1 className={Styles.header}>{name}</h1>
-					<h5 className={Styles.score}>{props.score[name as keyof score]}</h5>
+					<h5 className={Styles.score}>{`${props.score[name as keyof score]} ${
+						name === '=' ? 'draws' : 'wins'
+					}`}</h5>
 				</div>
 			))}
 		</div>

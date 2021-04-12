@@ -1,7 +1,7 @@
 :root {
-	--grid-size: 420px;
+	--grid-size: 550px;
 	--character-size: 90px;
-	--font-size: 35px;
+	--font-size: 45px;
 	--o-colour: #69d2e7;
 	--x-colour: #f38680;
 	--border-colour: lightsteelblue;
@@ -11,6 +11,12 @@
 * {
 	background-color: var(--background-colour);
 	margin: 0;
+}
+
+.App {
+	height: 80vh;
+	display: grid;
+	grid-template-rows: 0.33fr 1fr 0.33fr;
 }
 
 /* Creates the game grid */
@@ -27,4 +33,33 @@
 #r2c1 {
 	border-right: 2px solid var(--border-colour);
 	border-left: 2px solid var(--border-colour);
+}
+
+
+@media screen and (max-width: 1200px) and (max-width: 776px) {
+	:root {
+		--grid-size: 500px;
+		--character-size: 80px;
+		--font-size: 37.5px;
+	}
+}
+
+@media screen and (max-width: 850px) and (max-width: 776px) {
+	:root {
+		--grid-size: 400px;
+		--character-size: 75px;
+		--font-size: 35px;
+	}
+}
+
+@media screen and (max-width: 450px) {
+	:root {
+		--grid-size: 300px;
+		--character-size: 45px;
+		--font-size: 17.5px;
+	}
+
+	.App {
+		height: 95vh;
+	}
 }
