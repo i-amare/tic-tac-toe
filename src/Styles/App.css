@@ -1,6 +1,7 @@
 :root {
-	--grid-size: 400px;
+	--grid-size: 420px;
 	--character-size: 90px;
+	--font-size: 35px;
 	--o-colour: #69d2e7;
 	--x-colour: #f38680;
 	--border-colour: lightsteelblue;
@@ -9,6 +10,7 @@
 
 * {
 	background-color: var(--background-colour);
+	margin: 0;
 }
 
 /* Creates the game grid */

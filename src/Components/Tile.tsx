@@ -1,4 +1,4 @@
-import { CSSProperties } from 'react';
+import Styles from '../Styles/Tile.module.css';
 
 interface tileProps {
 	tileState: String;
@@ -8,27 +8,20 @@ interface tileProps {
 }
 
 const Tile = (props: tileProps) => {
-	const centerItems = {
-		display: 'grid',
-		alignContent: 'center',
-		justifyContent: 'center',
-	};
-
-	const characterStyling: CSSProperties = {
-		fontSize: 'var(--character-size)',
-		fontWeight: 'lighter',
-		color: `var(--${props.tileState}-colour)`,
-		margin: 0,
-	};
-
 	return (
 		<div
 			id={`r${props.rowIdx}c${props.colIdx}`}
-			className='view-tiles'
-			style={centerItems}
+			className={Styles.tile}
 			onClick={() => props.onTileClick(props.rowIdx, props.colIdx)}
 		>
-			<h3 style={characterStyling}>{props.tileState}</h3>
+			<h3
+				className={Styles.text}
+				style={{
+					color: `var(--${props.tileState}-colour)`,
+				}}
+			>
+				{props.tileState}
+			</h3>
 		</div>
 	);
 };

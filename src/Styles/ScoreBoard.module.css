@@ -1,0 +1,14 @@
+.scoreBoard {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	text-align: center;
+	font-size: var(--font-size);
+}
+
+.header {
+	font-weight: lighter;
+}
+
+.score {
+	font-weight: lighter;
+}

@@ -1,0 +1,12 @@
+.tile {
+	display: grid;
+	align-content: center;
+	justify-content: center;
+}
+
+.text {
+	font-size: var(--character-size);
+	font-weight: lighter;
+	text-align: center;
+	margin-bottom: 15px;
+}
