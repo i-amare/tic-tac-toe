@@ -5,6 +5,9 @@ interface footerProps {
 	resetGame: () => void;
 }
 
+/**
+ * @returns A JSX Element that houses game controls
+ */
 const Footer = (props: footerProps) => {
 	return (
 		<div className={Styles.container}>

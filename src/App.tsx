@@ -11,7 +11,11 @@ interface scoreBoard {
 	x: number;
 }
 
-function App() {
+/**
+ * A tic-tac-toe app the supports offline PvP(current), PvE(will be added soon) and online PvP(will be added soon)
+ * @returns A tic-tac-toe app
+ */
+const App = () => {
 	const [gridState, setGridState] = useState([
 		['', '', ''],
 		['', '', ''],
@@ -24,47 +28,78 @@ function App() {
 		x: 0,
 	});
 
-	const [currentPlayer, setCurrentPlayer] = useState('x');
+	const [currentPlayerState, setCurrentPlayerState] = useState('x');
 
 	const [gameState, setGameState] = useState(true);
 
+	/**
+	 * Handles a click on a tile
+	 * @param rowIdx The tiles x co-ord
+	 * @param colIdx The tiles y co-ord
+	 */
 	const onTileClick = (rowIdx: number, colIdx: number) => {
-		if (!gridState[rowIdx][colIdx] && gameState) {
-			updateGridState(rowIdx, colIdx);
-			switchCurrentPlayer();
-			if (Vendor.checkWin(gridState)) {
-				updateScore(`${currentPlayer}`);
-			} else if (Vendor.checkDraw(gridState)) {
-				updateScore('=');
-			}
+		// Blocks moves on tile if the tile is already occupied
+		if (gridState[rowIdx][colIdx] || !gameState) {
+			return null;
 		}
+		// Makes the move
+		updateGridState(rowIdx, colIdx);
+		// Checks for any potential updates to the game state
+		// Updates the score of the game
+		if (Vendor.checkWin(gridState)) {
+			updateScore(`${currentPlayerState}`);
+		} else if (Vendor.checkDraw(gridState)) {
+			updateScore('=');
+		}
+		// Changes the current player
+		switchCurrentPlayer();
 	};
 
+	/**
+	 * Will validate move and change the current grid state
+	 * @param rowIdx The x co-ord of the move
+	 * @param colIdx The y co-ord of the move
+	 */
 	const updateGridState = (rowIdx: number, colIdx: number) => {
-		let updatedGridState = gridState;
-		updatedGridState[rowIdx][colIdx] = currentPlayer;
+		if (gridState[rowIdx][colIdx]) {
+			return null;
+		}
+		let updatedGridState = [...gridState];
+		updatedGridState[rowIdx][colIdx] = currentPlayerState;
 		setGridState(updatedGridState);
 	};
 
+	/**
+	 * Updates the game score
+	 * @param score The key of the score that will be updated
+	 */
 	const updateScore = (score: String) => {
 		let newScore = scoreState;
 		newScore[score as keyof scoreBoard] += 1;
 		setScoreState(newScore);
-		setGameState(false)
+		setGameState(false);
 	};
 
+	/**
+	 * Changes the currentPlayerState by switching whose turn it is
+	 */
+	const switchCurrentPlayer = () => {
+		currentPlayerState === 'x'
+			? setCurrentPlayerState('o')
+			: setCurrentPlayerState('x');
+	};
+
+	/**
+	 * Restarts the game and clears the board
+	 */
 	const resetGame = () => {
 		setGridState([
 			['', '', ''],
 			['', '', ''],
 			['', '', ''],
 		]);
-		setCurrentPlayer('x');
+		setCurrentPlayerState('x');
 		setGameState(true);
-	};
-
-	const switchCurrentPlayer = () => {
-		currentPlayer === 'x' ? setCurrentPlayer('o') : setCurrentPlayer('x');
 	};
 
 	return (
@@ -74,6 +109,6 @@ function App() {
 			<Footer resetGame={resetGame} />
 		</div>
 	);
-}
+};
 
 export default App;

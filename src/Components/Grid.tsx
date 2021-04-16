@@ -6,6 +6,9 @@ interface gridProps {
 	onTileClick: (rowIdx: number, colIdx: number) => void;
 }
 
+/**
+ * @returns A JSX Element that renders the board
+ */
 const Grid = (props: gridProps) => {
 	return (
 		<div className={Styles.grid}>

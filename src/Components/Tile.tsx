@@ -6,7 +6,9 @@ interface tileProps {
 	colIdx: number;
 	onTileClick: (rowIdx: number, colIdx: number) => void;
 }
-
+/**
+ * @returns A JSX element that shows a piece of the board
+ */
 const Tile = (props: tileProps) => {
 	return (
 		<div

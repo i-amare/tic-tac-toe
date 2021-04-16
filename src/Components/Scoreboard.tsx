@@ -9,7 +9,9 @@ interface score {
 	'=': number;
 	x: number;
 }
-
+/**
+ * @returns A JSX Element that will display the score 
+ */
 const Scoreboard = (props: scoreBoardProps) => {
 	return (
 		<div className={Styles.scoreBoard}>
