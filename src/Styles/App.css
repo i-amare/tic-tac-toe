@@ -35,7 +35,6 @@
 	border-left: 2px solid var(--border-colour);
 }
 
-
 @media screen and (max-width: 1200px) and (max-width: 776px) {
 	:root {
 		--grid-size: 500px;
@@ -56,10 +55,10 @@
 	:root {
 		--grid-size: 300px;
 		--character-size: 45px;
-		--font-size: 17.5px;
+		--font-size: 25px;
 	}
 
 	.App {
-		height: 95vh;
+		height: 85vh;
 	}
 }

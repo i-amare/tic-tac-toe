@@ -3,7 +3,8 @@ import ScoreBoard from './Components/Scoreboard';
 import Footer from './Components/Footer';
 import './Styles/App.css';
 import { useState } from 'react';
-import Vendor from './Scripts/vendor';
+import Vendor from './Scripts/Vendor';
+import Player from './Scripts/Player';
 
 interface scoreBoard {
 	o: number;
@@ -39,34 +40,42 @@ const App = () => {
 	 */
 	const onTileClick = (rowIdx: number, colIdx: number) => {
 		// Blocks moves on tile if the tile is already occupied
-		if (gridState[rowIdx][colIdx] || !gameState) {
-			return null;
+		if (!gridState[rowIdx][colIdx] && gameState) {
+			makeMove(rowIdx, colIdx);
 		}
-		// Makes the move
-		updateGridState(rowIdx, colIdx);
-		// Checks for any potential updates to the game state
-		// Updates the score of the game
+	};
+
+	/**
+	 * Makes the AI's move
+	 */
+	const playAI = () => {
+		let newGrid = [...gridState];
+		const move = Player.move(newGrid, currentPlayerState);
+		makeMove(move[0], move[1]);
+	};
+
+	/**
+	 * Makes a move on the board and switches the current player
+	 * @param rowIdx The tiles x co-ord
+	 * @param colIdx The tiles y co-ord
+	 */
+	const makeMove = (rowIdx: number, colIdx: number) => {
+		// Ends the function if the move is invalid
+		if (gridState[rowIdx][colIdx]) {
+			return;
+		}
+		// Updates gridState to reflect the move made
+		let newGridState = [...gridState];
+		newGridState[rowIdx][colIdx] = currentPlayerState;
+		setGridState(newGridState);
+		// Checks for any potential updates to the game state and updates the score
 		if (Vendor.checkWin(gridState)) {
 			updateScore(`${currentPlayerState}`);
 		} else if (Vendor.checkDraw(gridState)) {
 			updateScore('=');
 		}
 		// Changes the current player
-		switchCurrentPlayer();
-	};
-
-	/**
-	 * Will validate move and change the current grid state
-	 * @param rowIdx The x co-ord of the move
-	 * @param colIdx The y co-ord of the move
-	 */
-	const updateGridState = (rowIdx: number, colIdx: number) => {
-		if (gridState[rowIdx][colIdx]) {
-			return null;
-		}
-		let updatedGridState = [...gridState];
-		updatedGridState[rowIdx][colIdx] = currentPlayerState;
-		setGridState(updatedGridState);
+		setCurrentPlayerState(currentPlayerState === 'x' ? 'o' : 'x');
 	};
 
 	/**
@@ -78,15 +87,6 @@ const App = () => {
 		newScore[score as keyof scoreBoard] += 1;
 		setScoreState(newScore);
 		setGameState(false);
-	};
-
-	/**
-	 * Changes the currentPlayerState by switching whose turn it is
-	 */
-	const switchCurrentPlayer = () => {
-		currentPlayerState === 'x'
-			? setCurrentPlayerState('o')
-			: setCurrentPlayerState('x');
 	};
 
 	/**
@@ -106,7 +106,7 @@ const App = () => {
 		<div className='App'>
 			<ScoreBoard score={scoreState} />
 			<Grid gridState={gridState} onTileClick={onTileClick} />
-			<Footer resetGame={resetGame} />
+			<Footer resetGame={resetGame} playAI={playAI} />
 		</div>
 	);
 };

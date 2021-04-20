@@ -1,4 +1,9 @@
 const Vendor = {
+	/**
+	 *
+	 * @param gridState The current state of the board
+	 * @returns true if a player has won, returns false otherwise
+	 */
 	checkWin(gridState: String[][]) {
 		// Check for wins vertically and horizontally
 		for (let i = 0; i < 3; i++) {
@@ -31,24 +36,21 @@ const Vendor = {
 		}
 		return false;
 	},
+	/**
+	 * Checks if there is a draw
+	 * @param gridState The current state of the board
+	 * @returns true if there is a draw, returns false otherwise
+	 */
 	checkDraw(gridState: String[][]) {
-		if (
-			gridState[0][0] &&
-			gridState[0][1] &&
-			gridState[0][2] &&
-			gridState[1][0] &&
-			gridState[1][1] &&
-			gridState[1][2] &&
-			gridState[2][0] &&
-			gridState[2][1] &&
-			gridState[2][2]
-		) {
-			return true;
+		for (let i = 0; i < 3; i++) {
+			for (let j = 0; j < 3; j++) {
+				if (!gridState[i][j]) {
+					return false;
+				}
+			}
 		}
-		return false;
+		return true;
 	},
 };
 
 export default Vendor;
-
-	

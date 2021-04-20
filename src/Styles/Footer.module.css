@@ -1,7 +1,11 @@
 .container {
 	display: grid;
-	align-items: center;
 	justify-content: center;
+}
+
+.imageContainer {
+	margin: auto;
+	margin-bottom: var(--font-size);
 }
 
 .btn {
