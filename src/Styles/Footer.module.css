@@ -3,11 +3,7 @@
 	justify-content: center;
 }
 
-.imageContainer {
-	margin: auto;
-	margin-bottom: var(--font-size);
-}
-
 .btn {
 	width: var(--font-size);
+	margin-bottom: var(--font-size);
 }

@@ -6,11 +6,11 @@ interface scoreBoardProps {
 
 interface score {
 	o: number;
-	'=': number;
+	equals: number;
 	x: number;
 }
 /**
- * @returns A JSX Element that will display the score 
+ * @returns A JSX Element that will display the score
  */
 const Scoreboard = (props: scoreBoardProps) => {
 	return (
@@ -22,9 +22,9 @@ const Scoreboard = (props: scoreBoardProps) => {
 					}}
 					key={nameIdx}
 				>
-					<h1 className={Styles.header}>{name}</h1>
+					<h1 className={Styles.header}>{name === 'equals' ? '=' : name}</h1>
 					<h5 className={Styles.score}>{`${props.score[name as keyof score]} ${
-						name === '=' ? 'draws' : 'wins'
+						name === 'equals' ? 'draws' : 'wins'
 					}`}</h5>
 				</div>
 			))}

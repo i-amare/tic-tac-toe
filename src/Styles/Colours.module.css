@@ -1,0 +1,26 @@
+.dotsContainer {
+	margin: auto;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	align-content: center;
+	justify-content: center;
+	width: 250px;
+}
+
+.dots {
+	margin: auto;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	transition: height 0.5s, width 0.5s;
+
+	-webkit-box-shadow: -1px 1px 3px -1px rgba(0, 0, 0, 0.75);
+	-moz-box-shadow: -1px 1px 3px -1px rgba(0, 0, 0, 0.75);
+	box-shadow: -1px 1px 3px -1px rgba(0, 0, 0, 0.75);
+}
+
+.dots:hover,
+.dots:active {
+	width: 25px;
+	height: 25px;
+}

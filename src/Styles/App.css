@@ -2,10 +2,11 @@
 	--grid-size: 550px;
 	--character-size: 90px;
 	--font-size: 45px;
-	--o-colour: #69d2e7;
-	--x-colour: #f38680;
+	--o-colour: #bb86fc;
+	--x-colour: #03dac6;
 	--border-colour: lightsteelblue;
-	--background-colour: #f5f7ee;
+	--background-colour: #151515;
+	--equals-colour: lightsteelblue;
 }
 
 * {
@@ -16,7 +17,7 @@
 .App {
 	height: 80vh;
 	display: grid;
-	grid-template-rows: 0.33fr 1fr 0.33fr;
+	grid-template-rows: 1fr 6fr 1fr 1fr;
 }
 
 /* Creates the game grid */

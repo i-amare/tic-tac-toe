@@ -1,5 +1,6 @@
-import Grid from './Components/Grid';
 import ScoreBoard from './Components/Scoreboard';
+import Grid from './Components/Grid';
+import Colours from './Components/Colours';
 import Footer from './Components/Footer';
 import './Styles/App.css';
 import { useState } from 'react';
@@ -8,8 +9,16 @@ import Player from './Scripts/Player';
 
 interface scoreBoard {
 	o: number;
-	'=': number;
+	equals: number;
 	x: number;
+}
+
+interface theme {
+	oColour: string;
+	xColour: string;
+	equalsColour: string;
+	borderColour: string;
+	bgColour: string;
 }
 
 /**
@@ -25,13 +34,34 @@ const App = () => {
 
 	const [scoreState, setScoreState] = useState({
 		o: 0,
-		'=': 0,
+		equals: 0,
 		x: 0,
 	});
 
 	const [currentPlayerState, setCurrentPlayerState] = useState('x');
 
 	const [gameState, setGameState] = useState(true);
+
+	/**
+	 * Changes the theme of the app
+	 * @param theme The colours of the new theme
+	 */
+	const changeTheme = (theme: theme) => {
+		document.documentElement.style.setProperty('--o-colour', theme.oColour);
+		document.documentElement.style.setProperty('--x-colour', theme.xColour);
+		document.documentElement.style.setProperty(
+			'--border-colour',
+			theme.borderColour
+		);
+		document.documentElement.style.setProperty(
+			'--background-colour',
+			theme.bgColour
+		);
+		document.documentElement.style.setProperty(
+			'--equals-colour',
+			theme.equalsColour
+		);
+	};
 
 	/**
 	 * Handles a click on a tile
@@ -49,9 +79,11 @@ const App = () => {
 	 * Makes the AI's move
 	 */
 	const playAI = () => {
-		let newGrid = [...gridState];
-		const move = Player.move(newGrid, currentPlayerState);
-		makeMove(move[0], move[1]);
+		if (gameState) {
+			let newGrid = [...gridState];
+			const move = Player.move(newGrid, currentPlayerState);
+			makeMove(move[0], move[1]);
+		}
 	};
 
 	/**
@@ -72,7 +104,7 @@ const App = () => {
 		if (Vendor.checkWin(gridState)) {
 			updateScore(`${currentPlayerState}`);
 		} else if (Vendor.checkDraw(gridState)) {
-			updateScore('=');
+			updateScore('equals');
 		}
 		// Changes the current player
 		setCurrentPlayerState(currentPlayerState === 'x' ? 'o' : 'x');
@@ -106,6 +138,7 @@ const App = () => {
 		<div className='App'>
 			<ScoreBoard score={scoreState} />
 			<Grid gridState={gridState} onTileClick={onTileClick} />
+			<Colours changeTheme={changeTheme} />
 			<Footer resetGame={resetGame} playAI={playAI} />
 		</div>
 	);

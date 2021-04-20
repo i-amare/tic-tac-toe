@@ -4,7 +4,7 @@ import Styles from '../Styles/Footer.module.css';
 
 interface footerProps {
 	resetGame: () => void;
-	playAI: () => void
+	playAI: () => void;
 }
 
 /**
