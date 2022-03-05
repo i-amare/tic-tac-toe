@@ -44,6 +44,7 @@ const Player = {
 				possibleMoves.push([i, j]);
 			}
 		}
+
 		return possibleMoves;
 	},
 	/**
@@ -80,44 +81,6 @@ const Player = {
 			return bestScore;
 		}
 	},
-
-	// minimax(gridState: String[][], isMaxing: boolean, depth: number) {
-	// 	// Return evaluation of move
-	// 	if (Vendor.checkWin(gridState)) {
-	// 		return {
-	// 			score: isMaxing ? 10 - depth : -10 + depth,
-	// 			gridState: gridState,
-	// 			depth: depth,
-	// 		};
-	// 	} else if (Vendor.checkDraw(gridState)) {
-	// 		return {
-	// 			score: isMaxing ? -depth : +depth,
-	// 			gridState: gridState,
-	// 			depth: depth,
-	// 		};
-	// 	}
-
-	// 	// Recursivley calls minimax to find the moves valuation
-	// 	if (isMaxing) {
-	// 		let bestScore = -Infinity;
-	// 		this.possibleMoves(gridState).forEach((move) => {
-	// 			gridState[move[0]][move[1]] = 'x';
-	// 			let score = this.minimax(gridState, false, depth + 1).score;
-	// 			gridState[move[0]][move[1]] = '';
-	// 			bestScore = Math.max(bestScore, score);
-	// 		});
-	// 		return { score: bestScore, gridState, depth: depth };
-	// 	} else {
-	// 		let bestScore = Infinity;
-	// 		this.possibleMoves(gridState).forEach((move) => {
-	// 			gridState[move[0]][move[1]] = 'o';
-	// 			let score = this.minimax(gridState, true, depth + 1).score;
-	// 			gridState[move[0]][move[1]] = '';
-	// 			bestScore = Math.min(bestScore, score);
-	// 		});
-	// 		return { score: bestScore, gridState, depth: depth };
-	// 	}
-	// },
 };
 
 export default Player;
