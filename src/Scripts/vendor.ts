@@ -1,6 +1,5 @@
 const Vendor = {
 	/**
-	 *
 	 * @param gridState The current state of the board
 	 * @returns true if a player has won, returns false otherwise
 	 */
